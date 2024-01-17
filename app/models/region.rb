@@ -1,3 +1,5 @@
+# Represents a real world region, usually a city or town
+
 class Region < ApplicationRecord
 
   has_many :tickets
