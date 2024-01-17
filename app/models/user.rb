@@ -1,3 +1,5 @@
+# Represents a user account
+
 class User < ApplicationRecord
 
   enum role: [:admin, :organization]
