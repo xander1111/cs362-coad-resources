@@ -1,3 +1,5 @@
+# Represents a help request ticket
+
 class Ticket < ApplicationRecord
 
   belongs_to :region
