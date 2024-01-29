@@ -14,4 +14,6 @@ RSpec.describe Region, type: :model do
     result = region2.to_s
   end
 
+  it { should have_many(:tickets) }
+
 end
