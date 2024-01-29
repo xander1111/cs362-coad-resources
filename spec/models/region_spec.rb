@@ -10,7 +10,8 @@ RSpec.describe Region, type: :model do
 
   it "has a string representation that is its name" do
     name = 'Mt. Hood'
-    result = region.to_s
+    region2 = Region.new(name: name)
+    result = region2.to_s
   end
 
 end
