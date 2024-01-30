@@ -40,4 +40,15 @@ RSpec.describe Ticket, type: :model do
   it { should belong_to(:resource_category) }
   it { should belong_to(:organization).optional }
 
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:phone) }
+  it { should validate_presence_of(:region_id) }
+  it { should validate_presence_of(:resource_category_id) }
+
+  it { should validate_length_of(:name).is_at_least(1).is_at_most(255) }
+  it { should validate_length_of(:description).is_at_most(1020) }
+
+  it { should allow_value("+1 555 555 5555").for(:phone) }
+  it { should_not allow_value("not a phone number").for(:phone) }
+
 end
