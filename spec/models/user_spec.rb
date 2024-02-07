@@ -22,4 +22,10 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of(:password) }
   it { should validate_length_of(:password).is_at_least(7).is_at_most(255) }
 
+  it "has a string representation that is the user's email" do
+    email = "test_email@example.com"
+    test_user = User.new(email: email)
+    expect(test_user.to_s).to eq(email)
+  end
+
 end
