@@ -51,4 +51,13 @@ RSpec.describe Ticket, type: :model do
   it { should allow_value("+1 555 555 5555").for(:phone) }
   it { should_not allow_value("not a phone number").for(:phone) }
 
+  it "can tell when it's open" do
+    expect(ticket).to be_open
+  end
+
+  it "can tell when it's closed" do
+    ticket.closed = true
+    expect(ticket).to_not be_open
+  end
+
 end
