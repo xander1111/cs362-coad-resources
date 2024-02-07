@@ -28,4 +28,9 @@ RSpec.describe User, type: :model do
     expect(test_user.to_s).to eq(email)
   end
 
+  it "sets the default role to the organization" do
+    user.set_default_role
+    expect(user.role).to eq("organization")
+  end
+
 end
