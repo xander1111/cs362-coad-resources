@@ -60,4 +60,13 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to_not be_open
   end
 
+  it "can tell if there is no responsible orginization" do
+    expect(ticket).to_not be_captured
+  end
+
+  it "can tell if there is a responsible orginization" do
+    ticket.organization = Organization.new()
+    expect(ticket).to be_captured
+  end
+
 end
