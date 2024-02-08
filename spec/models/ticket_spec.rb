@@ -74,20 +74,24 @@ RSpec.describe Ticket, type: :model do
     expect(ticket.to_s).to eq("Ticket 1")
   end
 
-  it "can provide a list of all open tickets" do
-    @reg = Region.create(:name => "test region")
-    @res_cat = ResourceCategory.create(:name => "test category")
-    @open_ticket = Ticket.create(:closed => false, :region => @reg, :resource_category => @res_cat, :name => "open", :phone => "+1 555 555 5555")
-    @closed_ticket = Ticket.create(:closed => true, :region => @reg, :resource_category => @res_cat, :name => "closed", :phone => "+1 555 555 5555") 
-    expect(Ticket.open).to contain_exactly(@open_ticket)
-  end
+  describe "database tests" do
 
-  it "can provide a list of all closed tickets" do
-    @reg = Region.create(:name => "test region")
-    @res_cat = ResourceCategory.create(:name => "test category")
-    @open_ticket = Ticket.create(:closed => false, :region => @reg, :resource_category => @res_cat, :name => "open", :phone => "+1 555 555 5555")
-    @closed_ticket = Ticket.create(:closed => true, :region => @reg, :resource_category => @res_cat, :name => "closed", :phone => "+1 555 555 5555") 
-    expect(Ticket.closed).to contain_exactly(@closed_ticket)
+    let (:reg) { Region.create(:name => "test region") }
+    let (:resource_cat) { ResourceCategory.create(:name => "test category") }
+
+    before do
+      @open_ticket = Ticket.create(:closed => false, :region => reg, :resource_category => resource_cat, :name => "open", :phone => "+1 555 555 5555")
+      @closed_ticket = Ticket.create(:closed => true, :region => reg, :resource_category => resource_cat, :name => "closed", :phone => "+1 555 555 5555")
+    end
+
+    it "can provide a list of all open tickets" do
+      expect(Ticket.open).to contain_exactly(@open_ticket)
+    end
+  
+    it "can provide a list of all closed tickets" do
+      expect(Ticket.closed).to contain_exactly(@closed_ticket)
+    end
+
   end
 
 end
