@@ -83,7 +83,8 @@ RSpec.describe Ticket, type: :model do
     before do
       @open_ticket = Ticket.create(:closed => false, :region => reg, :resource_category => resource_cat, :name => "open", :phone => "+1 555 555 5555")
       @closed_ticket = Ticket.create(:closed => true, :region => reg, :resource_category => resource_cat, :name => "closed", :phone => "+1 555 555 5555")
-      @ticket_with_org = Ticket.create!(:closed => false, :region => reg, :resource_category => resource_cat, :name => "open", :phone => "+1 555 555 5555", :organization => org)
+      @open_ticket_with_org = Ticket.create!(:closed => false, :region => reg, :resource_category => resource_cat, :name => "open", :phone => "+1 555 555 5555", :organization => org)
+      @closed_ticket_with_org = Ticket.create!(:closed => true, :region => reg, :resource_category => resource_cat, :name => "closed", :phone => "+1 555 555 5555", :organization => org)
     end
 
     it "can provide a list of all open tickets" do
@@ -91,15 +92,19 @@ RSpec.describe Ticket, type: :model do
     end
   
     it "can provide a list of all closed tickets" do
-      expect(Ticket.closed).to contain_exactly(@closed_ticket)
+      expect(Ticket.closed).to contain_exactly(@closed_ticket, @closed_ticket_with_org)
     end
 
     it "can provide a list of all open tickets with an assigned organization" do
-      expect(Ticket.all_organization).to contain_exactly(@ticket_with_org)
+      expect(Ticket.all_organization).to contain_exactly(@open_ticket_with_org)
     end
 
     it "can find all open tickets with a specified organization" do
-      expect(Ticket.organization(org.id)).to contain_exactly(@ticket_with_org)
+      expect(Ticket.organization(org.id)).to contain_exactly(@open_ticket_with_org)
+    end
+
+    it "can find all closed tickets with a specified organization" do
+      expect(Ticket.closed_organization(org.id)).to contain_exactly(@closed_ticket_with_org)
     end
 
   end
