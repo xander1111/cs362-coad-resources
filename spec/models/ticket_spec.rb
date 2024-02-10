@@ -16,7 +16,7 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to respond_to(:phone)
   end
 
-  it "has an orginization id" do
+  it "has an organization id" do
     expect(ticket).to respond_to(:organization_id)
   end
 
@@ -60,11 +60,11 @@ RSpec.describe Ticket, type: :model do
     expect(ticket).to_not be_open
   end
 
-  it "can tell if there is no responsible orginization" do
+  it "can tell if there is no responsible organization" do
     expect(ticket).to_not be_captured
   end
 
-  it "can tell if there is a responsible orginization" do
+  it "can tell if there is a responsible organization" do
     ticket.organization = Organization.new()
     expect(ticket).to be_captured
   end
@@ -78,10 +78,12 @@ RSpec.describe Ticket, type: :model do
 
     let (:reg) { Region.create(:name => "test region") }
     let (:resource_cat) { ResourceCategory.create(:name => "test category") }
+    let (:org) { Organization.create!(:name => "test org", :email => "org@example.com", :phone => "+1 555 555 5556", :primary_name => "org pname", :secondary_name => "org sname", :secondary_phone => "+1 555 555 5557") }
 
     before do
       @open_ticket = Ticket.create(:closed => false, :region => reg, :resource_category => resource_cat, :name => "open", :phone => "+1 555 555 5555")
       @closed_ticket = Ticket.create(:closed => true, :region => reg, :resource_category => resource_cat, :name => "closed", :phone => "+1 555 555 5555")
+      @ticket_with_org = Ticket.create!(:closed => false, :region => reg, :resource_category => resource_cat, :name => "open", :phone => "+1 555 555 5555", :organization => org)
     end
 
     it "can provide a list of all open tickets" do
@@ -90,6 +92,10 @@ RSpec.describe Ticket, type: :model do
   
     it "can provide a list of all closed tickets" do
       expect(Ticket.closed).to contain_exactly(@closed_ticket)
+    end
+
+    it "can provide a list of all open tickets with an assigned organization" do
+      expect(Ticket.all_organization).to contain_exactly(@ticket_with_org)
     end
 
   end
