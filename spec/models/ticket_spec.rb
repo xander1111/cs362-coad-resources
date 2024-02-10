@@ -78,14 +78,15 @@ RSpec.describe Ticket, type: :model do
 
     let (:reg1) { Region.create(:name => "test region 1") }
     let (:reg2) { Region.create(:name => "test region 2") }
-    let (:resource_cat) { ResourceCategory.create(:name => "test category") }
+    let (:resource_cat1) { ResourceCategory.create!(:name => "test category 1") }
+    let (:resource_cat2) { ResourceCategory.create!(:name => "test category 2") }
     let (:org) { Organization.create!(:name => "test org", :email => "org@example.com", :phone => "+1 555 555 5556", :primary_name => "org pname", :secondary_name => "org sname", :secondary_phone => "+1 555 555 5557") }
 
     before do
-      @open_ticket = Ticket.create(:closed => false, :region => reg1, :resource_category => resource_cat, :name => "open", :phone => "+1 555 555 5555")
-      @closed_ticket = Ticket.create(:closed => true, :region => reg1, :resource_category => resource_cat, :name => "closed", :phone => "+1 555 555 5555")
-      @open_ticket_with_org = Ticket.create!(:closed => false, :region => reg2, :resource_category => resource_cat, :name => "open", :phone => "+1 555 555 5555", :organization => org)
-      @closed_ticket_with_org = Ticket.create!(:closed => true, :region => reg2, :resource_category => resource_cat, :name => "closed", :phone => "+1 555 555 5555", :organization => org)
+      @open_ticket = Ticket.create(:closed => false, :region => reg1, :resource_category => resource_cat1, :name => "open", :phone => "+1 555 555 5555")
+      @closed_ticket = Ticket.create(:closed => true, :region => reg1, :resource_category => resource_cat2, :name => "closed", :phone => "+1 555 555 5555")
+      @open_ticket_with_org = Ticket.create!(:closed => false, :region => reg2, :resource_category => resource_cat1, :name => "open", :phone => "+1 555 555 5555", :organization => org)
+      @closed_ticket_with_org = Ticket.create!(:closed => true, :region => reg2, :resource_category => resource_cat2, :name => "closed", :phone => "+1 555 555 5555", :organization => org)
     end
 
     it "can provide a list of all open tickets" do
@@ -110,6 +111,10 @@ RSpec.describe Ticket, type: :model do
 
     it "can find all tickets with a specified region" do
       expect(Ticket.region(reg1.id)).to contain_exactly(@open_ticket, @closed_ticket)
+    end
+
+    it "can fin all tickets with a specified resource category" do
+      expect(Ticket.resource_category(resource_cat1.id)).to contain_exactly(@open_ticket, @open_ticket_with_org)
     end
 
   end
