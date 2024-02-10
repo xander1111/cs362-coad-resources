@@ -98,6 +98,10 @@ RSpec.describe Ticket, type: :model do
       expect(Ticket.all_organization).to contain_exactly(@ticket_with_org)
     end
 
+    it "can find all open tickets with a specified organization" do
+      expect(Ticket.organization(org.id)).to contain_exactly(@ticket_with_org)
+    end
+
   end
 
 end
