@@ -6,7 +6,7 @@ FactoryBot.define do
     sequence(:phone) { |n| "+1 555 555 #{1000 + n}" }
     sequence(:secondary_phone) { |n| "+1 555 555 #{2000 + n}" }
 
-    status { nil }
+    status { 0 }
 
     sequence(:primary_name) { |n| "primary #{n}" }
     sequence(:secondary_name) { |n| "secondary #{n}" }
