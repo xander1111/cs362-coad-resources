@@ -113,7 +113,7 @@ RSpec.describe Ticket, type: :model do
       expect(Ticket.region(reg1.id)).to contain_exactly(@open_ticket, @closed_ticket)
     end
 
-    it "can fin all tickets with a specified resource category" do
+    it "can find all tickets with a specified resource category" do
       expect(Ticket.resource_category(resource_cat1.id)).to contain_exactly(@open_ticket, @open_ticket_with_org)
     end
 
