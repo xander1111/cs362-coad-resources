@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
 
-  let (:ticket) { Ticket.new }
+  let (:ticket) { FactoryBot.build_stubbed(:ticket) }
 
   it "has a name" do
     expect(ticket).to respond_to(:name)
@@ -65,7 +65,7 @@ RSpec.describe Ticket, type: :model do
   end
 
   it "can tell if there is a responsible organization" do
-    ticket.organization = Organization.new()
+    ticket.organization = FactoryBot.build_stubbed(:organization)
     expect(ticket).to be_captured
   end
 
