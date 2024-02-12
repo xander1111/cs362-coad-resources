@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  let (:user) { User.new }
+  let (:user) { FactoryBot.build_stubbed(:user) }
 
   it "has an email" do
     expect(user).to respond_to(:email)
@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
 
   it "has a string representation that is the user's email" do
     email = "test_email@example.com"
-    test_user = User.new(email: email)
+    test_user = FactoryBot.build_stubbed(:user, email: email)
     expect(test_user.to_s).to eq(email)
   end
 
