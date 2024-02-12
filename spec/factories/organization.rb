@@ -1,15 +1,15 @@
 FactoryBot.define do
 
   factory :organization do
-    sequence(:email) { |n| "example_org-#{n}@example.com" }
-    sequence(:name) { |n| "org ##{n}" }
-    sequence(:phone) { |n| "+1 555 555 #{1000 + n}" }
-    sequence(:secondary_phone) { |n| "+1 555 555 #{2000 + n}" }
+    email
+    name
+    phone
+    secondary_phone { generate(:phone) }
 
     status { 0 }
 
-    sequence(:primary_name) { |n| "primary #{n}" }
-    sequence(:secondary_name) { |n| "secondary #{n}" }
+    primary_name { generate(:name) }
+    secondary_name { generate(:name) }
   end
 
 end
