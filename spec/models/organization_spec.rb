@@ -75,4 +75,7 @@ RSpec.describe Organization, type: :model do
   it { should validate_length_of(:name).is_at_least(1).is_at_most(255) }
   it { should validate_length_of(:description).is_at_most(1020) }
 
+  it { should validate_uniqueness_of(:email).case_insensitive }
+  it { should validate_uniqueness_of(:name).case_insensitive }
+
 end
