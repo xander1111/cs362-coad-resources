@@ -37,6 +37,10 @@ RSpec.describe ResourceCategory, type: :model do
     expect(@res_cat.to_s).to eq(@name)
   end
 
+  it "can provide a 'unspecified' category" do
+    expect(ResourceCategory.unspecified.name).to eq("Unspecified")
+  end
+
   describe "database tests" do
 
     let (:res_cat_db) { create(:resource_category) }
