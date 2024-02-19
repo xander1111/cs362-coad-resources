@@ -20,4 +20,8 @@ RSpec.describe Organization, type: :model do
     expect(org).to respond_to(:email)
   end
 
+  it "has a description" do
+    expect(org).to respond_to(:description)
+  end
+
 end
