@@ -86,4 +86,9 @@ RSpec.describe Organization, type: :model do
     expect(org.status).to eq("approved")
   end
 
+  it "can be rejected" do
+    org.reject
+    expect(org.status).to eq("rejected")
+  end
+
 end
