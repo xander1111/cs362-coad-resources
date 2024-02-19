@@ -91,4 +91,10 @@ RSpec.describe Organization, type: :model do
     expect(org.status).to eq("rejected")
   end
 
+  it "can assign a default status to itself" do
+    @org = build_stubbed(:organization, status: nil)
+    @org.set_default_status
+    expect(@org.status).to eq("submitted")
+  end
+
 end
