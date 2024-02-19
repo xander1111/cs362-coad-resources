@@ -40,4 +40,8 @@ RSpec.describe Organization, type: :model do
     expect(org).to respond_to(:secondary_name)
   end
 
+  it "has a title" do
+    expect(org).to respond_to(:title)
+  end
+
 end
