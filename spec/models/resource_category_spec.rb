@@ -60,6 +60,10 @@ RSpec.describe ResourceCategory, type: :model do
       expect(ResourceCategory.active).to contain_exactly(active_res_cat)
     end
 
+    it "can provide a list of inactive resource categories" do
+      expect(ResourceCategory.inactive).to contain_exactly(inactive_res_cat)
+    end
+
   end
 
 end
