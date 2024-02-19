@@ -31,6 +31,12 @@ RSpec.describe ResourceCategory, type: :model do
     expect(res_cat.inactive?).to be_falsy
   end
 
+  it "has a string reppresentation that is its name" do
+    @name = "test name"
+    @res_cat = build_stubbed(:resource_category, name: @name)
+    expect(@res_cat.to_s).to eq(@name)
+  end
+
   describe "database tests" do
 
     let (:res_cat_db) { create(:resource_category) }
