@@ -96,4 +96,8 @@ RSpec.describe Organization, type: :model do
     expect(org.status).to eq("submitted")
   end
 
+  it "has a string representation that is its name" do
+    expect(org.to_s).to eq(org.name)
+  end
+
 end
