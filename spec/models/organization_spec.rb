@@ -48,6 +48,17 @@ RSpec.describe Organization, type: :model do
     expect(org).to respond_to(:transportation)
   end
 
+  it "has eight agreements" do
+    expect(org).to respond_to(:agreement_one)
+    expect(org).to respond_to(:agreement_two)
+    expect(org).to respond_to(:agreement_three)
+    expect(org).to respond_to(:agreement_four)
+    expect(org).to respond_to(:agreement_five)
+    expect(org).to respond_to(:agreement_six)
+    expect(org).to respond_to(:agreement_seven)
+    expect(org).to respond_to(:agreement_eight)
+  end
+
   it { should have_many(:users) }
   it { should have_many(:tickets) }
   it { should have_and_belong_to_many(:resource_categories) }
