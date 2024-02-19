@@ -63,4 +63,12 @@ RSpec.describe Organization, type: :model do
   it { should have_many(:tickets) }
   it { should have_and_belong_to_many(:resource_categories) }
 
+  it { should validate_presence_of(:email) }
+  it { should validate_presence_of(:name) }
+  it { should validate_presence_of(:phone) }
+  it { should validate_presence_of(:status) }
+  it { should validate_presence_of(:primary_name) }
+  it { should validate_presence_of(:secondary_name) }
+  it { should validate_presence_of(:secondary_phone) }
+
 end
