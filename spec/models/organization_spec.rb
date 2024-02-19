@@ -16,4 +16,8 @@ RSpec.describe Organization, type: :model do
     expect(org).to respond_to(:phone)
   end
 
+  it "has an email" do
+    expect(org).to respond_to(:email)
+  end
+
 end
