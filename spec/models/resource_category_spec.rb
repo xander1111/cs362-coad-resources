@@ -21,6 +21,16 @@ RSpec.describe ResourceCategory, type: :model do
   
   it { should validate_uniqueness_of(:name).case_insensitive }
 
+  it "can tell if it's inactive" do
+    res_cat.active = false
+    expect(res_cat.inactive?).to be_truthy
+  end
+
+  it "can tell if it's active" do
+    res_cat.active = true
+    expect(res_cat.inactive?).to be_falsy
+  end
+
   describe "database tests" do
 
     let (:res_cat_db) { create(:resource_category) }
