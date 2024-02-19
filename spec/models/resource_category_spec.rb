@@ -43,16 +43,21 @@ RSpec.describe ResourceCategory, type: :model do
 
   describe "database tests" do
 
-    let (:res_cat_db) { create(:resource_category) }
+    let (:active_res_cat) { create(:resource_category, active: true) }
+    let (:inactive_res_cat) { create(:resource_category, active: false) }
 
     it "can activate itself" do
-      res_cat_db.activate
-      expect(res_cat_db).to be_active
+      active_res_cat.activate
+      expect(active_res_cat).to be_active
     end
   
     it "can deactivate itself" do
-      res_cat_db.deactivate
-      expect(res_cat_db).to_not be_active
+      active_res_cat.deactivate
+      expect(active_res_cat).to_not be_active
+    end
+    
+    it "can provide a list of active resource categories" do
+      expect(ResourceCategory.active).to contain_exactly(active_res_cat)
     end
 
   end
