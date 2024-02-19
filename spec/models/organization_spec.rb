@@ -28,4 +28,8 @@ RSpec.describe Organization, type: :model do
     expect(org).to respond_to(:rejection_reason)
   end
 
+  it "has a liability insurance flag" do
+    expect(org).to respond_to(:liability_insurance)
+  end
+
 end
