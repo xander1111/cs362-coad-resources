@@ -81,4 +81,9 @@ RSpec.describe Organization, type: :model do
   it { should allow_value("user@example.com").for(:email) }
   it { should_not allow_value("not an email").for(:email) }
 
+  it "can be approved" do
+    org.approve
+    expect(org.status).to eq("approved")
+  end
+
 end
