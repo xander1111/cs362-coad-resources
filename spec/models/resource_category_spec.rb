@@ -2,9 +2,14 @@ require 'rails_helper'
 
 RSpec.describe ResourceCategory, type: :model do
 
+  let (:res_cat) { build_stubbed(:resource_category) }
+
   it "has a name" do
-    @res_cat = build_stubbed(:resource_category)
-    expect(@res_cat).to respond_to(:name)
+    expect(res_cat).to respond_to(:name)
+  end
+
+  it "has an active status" do
+    expect(res_cat).to respond_to(:active)
   end
 
 end
