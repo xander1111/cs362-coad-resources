@@ -44,4 +44,8 @@ RSpec.describe Organization, type: :model do
     expect(org).to respond_to(:title)
   end
 
+  it "has a transportation status" do
+    expect(org).to respond_to(:transportation)
+  end
+
 end
