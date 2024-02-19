@@ -12,4 +12,7 @@ RSpec.describe ResourceCategory, type: :model do
     expect(res_cat).to respond_to(:active)
   end
 
+  it { should have_and_belong_to_many(:organizations) }
+  it { should have_many(:tickets) }
+
 end
