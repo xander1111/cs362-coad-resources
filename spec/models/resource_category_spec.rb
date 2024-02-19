@@ -21,4 +21,10 @@ RSpec.describe ResourceCategory, type: :model do
   
   it { should validate_uniqueness_of(:name).case_insensitive }
 
+  it "can activate itself" do
+    @res_cat = create(:resource_category)
+    @res_cat.activate
+    expect(@res_cat).to be_active
+  end
+
 end
