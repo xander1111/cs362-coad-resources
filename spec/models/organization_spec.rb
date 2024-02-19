@@ -32,4 +32,8 @@ RSpec.describe Organization, type: :model do
     expect(org).to respond_to(:liability_insurance)
   end
 
+  it "has a primary name" do
+    expect(org).to respond_to(:primary_name)
+  end
+
 end
