@@ -24,4 +24,8 @@ RSpec.describe Organization, type: :model do
     expect(org).to respond_to(:description)
   end
 
+  it "has a rejection reason" do
+    expect(org).to respond_to(:rejection_reason)
+  end
+
 end
