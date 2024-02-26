@@ -5,8 +5,6 @@ RSpec.describe DashboardController, type: :controller do
   describe "GET /dashboard" do
 
     context "logged out user" do
-
-      let (:user) { nil }
   
       it "redirects to sign in page" do
         get :index
