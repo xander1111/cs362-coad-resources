@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrganizationsController, type: :controller do
 
-  describe "GET /organizations" do
+  context "no user" do
+    describe "GET /organizations" do
 
-    context "logged out user" do
-    
       it "redirects to sign in page" do
         get :index
         expect(response).to redirect_to('/users/sign_in')
@@ -13,24 +12,60 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
-    context "normal user" do
-        
+    describe "POST /organizations" do
+
+      it "redirects to sign in page" do
+        post(:create, params: { organization: attributes_for(:organization) })
+        expect(response).to redirect_to('/users/sign_in')
+      end
+
+    end
+
+  end
+
+  context "normal user" do
+
+    let (:user) { create(:user) }
+    before(:each) { sign_in(user) }
+
+    describe "GET /organizations" do
       it "should be successful" do
-        user = create(:user)
-        sign_in(user) 
         get :index
         expect(response).to be_successful
       end
 
     end
-  
-    context "admin user" do
-  
+
+    describe "POST /organizations" do
+
       it "should be successful" do
-        user = create(:user, role: :admin)
-        sign_in(user) 
+        create(:user, role: :admin)
+        post(:create, params: { organization: attributes_for(:organization) })
+        expect(response).to redirect_to(organization_application_submitted_path)
+      end
+
+    end
+
+  end
+
+  context "admin user" do
+
+    let (:user) { create(:user, role: :admin) }
+    before(:each) { sign_in(user) }
+
+    describe "GET /organizations" do
+      it "should be successful" do
         get :index
         expect(response).to be_successful
+      end
+
+    end
+
+    describe "POST /organizations" do
+
+      it "should be successful" do
+        post(:create, params: { organization: attributes_for(:organization) })
+        expect(response).to redirect_to(dashboard_path)
       end
 
     end
