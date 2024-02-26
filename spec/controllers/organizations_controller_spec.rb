@@ -38,7 +38,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
     describe "POST /organizations" do
 
-      it "should be successful" do
+      it "should redirect to the submitted path" do
         create(:user, role: :admin)
         post(:create, params: { organization: attributes_for(:organization) })
         expect(response).to redirect_to(organization_application_submitted_path)
@@ -63,7 +63,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
     describe "POST /organizations" do
 
-      it "should be successful" do
+      it "should redirect to the dashboard" do
         post(:create, params: { organization: attributes_for(:organization) })
         expect(response).to redirect_to(dashboard_path)
       end
