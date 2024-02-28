@@ -21,12 +21,22 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
+    describe "GET /organizations/new" do
+      it "redirects to sign in page" do
+        get :new
+        expect(response).to redirect_to('/users/sign_in')
+      end
+    end
+
   end
 
   context "normal user" do
 
     let (:user) { create(:user) }
-    before(:each) { sign_in(user) }
+    before(:each) {
+      create(:user, role: :admin)
+      sign_in(user)
+    }
 
     describe "GET /organizations" do
       it "should be successful" do
@@ -38,10 +48,18 @@ RSpec.describe OrganizationsController, type: :controller do
 
     describe "POST /organizations" do
 
-      it "should redirect to the submitted path" do
-        create(:user, role: :admin)
+      it "redirects to the submitted path" do
         post(:create, params: { organization: attributes_for(:organization) })
         expect(response).to redirect_to(organization_application_submitted_path)
+      end
+
+    end
+
+    describe "GET /organizations/new" do
+
+      it "should be successful" do
+        get :new
+        expect(response).to be_successful
       end
 
     end
@@ -63,8 +81,17 @@ RSpec.describe OrganizationsController, type: :controller do
 
     describe "POST /organizations" do
 
-      it "should redirect to the dashboard" do
+      it "redirects to the dashboard" do
         post(:create, params: { organization: attributes_for(:organization) })
+        expect(response).to redirect_to(dashboard_path)
+      end
+
+    end
+
+    describe "GET /organizations/new" do
+
+      it "redirects to the dashboard" do
+        get :new
         expect(response).to redirect_to(dashboard_path)
       end
 
