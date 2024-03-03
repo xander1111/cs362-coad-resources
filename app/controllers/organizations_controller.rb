@@ -50,7 +50,8 @@ class OrganizationsController < ApplicationController
     if @organization.save
       redirect_to organizations_path, notice: "Organization #{@organization.name} has been approved."
     else
-      render organization_path(id: @organization.id)
+      #render organization_path(id: @organization.id)
+      redirect_to organization_path(id: @organization.id), alert: "Problem approving organization"
     end
   end
 
