@@ -35,6 +35,13 @@ RSpec.describe OrganizationsController, type: :controller do
       end
     end
 
+    describe "GET /organizations/:id/edit" do
+      it "redirects to sign in page" do
+        get :edit, params: { id: 1 }
+        expect(response).to redirect_to('/users/sign_in')
+      end
+    end
+
   end
 
   context "normal user" do
@@ -78,6 +85,12 @@ RSpec.describe OrganizationsController, type: :controller do
       end
     end
 
+    describe "GET /organizations/:id/edit" do
+      it "redirects to dashbaord" do
+        get :edit, params: { id: 1 }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
   end
 
   context "admin user" do
@@ -116,6 +129,13 @@ RSpec.describe OrganizationsController, type: :controller do
         create(:organization, status: :submitted)
         get :show, params: { id: 1 }
         expect(response).to be_successful
+      end
+    end
+
+    describe "GET /organizations/:id/edit" do
+      it "redirects to dashboard" do
+        get :edit, params: { id: 1 }
+        expect(response).to redirect_to(dashboard_path)
       end
     end
 
