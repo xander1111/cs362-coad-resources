@@ -50,6 +50,14 @@ RSpec.describe OrganizationsController, type: :controller do
       end
     end
 
+    describe "organizations#approve" do
+      it "redirects to sign in page" do
+        @organization = create(:organization, status: :submitted)
+        post :approve, params: { id: @organization.id }
+        expect(response).to redirect_to('/users/sign_in')
+      end
+    end
+
   end
 
   context "unapproved user" do
@@ -104,6 +112,14 @@ RSpec.describe OrganizationsController, type: :controller do
       it "redirects to dashboard" do
         @organization = create(:organization, name: "original name")
         patch :update, params: { id: @organization.id, organization: attributes_for(:organization).merge(name: "new name") }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "organizations#approve" do
+      it "redirects to dashboard" do
+        @organization = create(:organization, status: :submitted)
+        post :approve, params: { id: @organization.id }
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -165,6 +181,14 @@ RSpec.describe OrganizationsController, type: :controller do
       end
     end
 
+    describe "organizations#approve" do
+      it "redirects to dashboard" do
+        @organization = create(:organization, status: :submitted)
+        post :approve, params: { id: @organization.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
   end
 
   context "admin user" do
@@ -218,6 +242,14 @@ RSpec.describe OrganizationsController, type: :controller do
         @organization = create(:organization, name: "original name")
         patch :update, params: { id: @organization.id, organization: attributes_for(:organization).merge(name: "new name") }
         expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "organizations#approve" do
+      it "redirects to organizations path" do
+        @organization = create(:organization, status: :submitted)
+        post :approve, params: { id: @organization.id }
+        expect(response).to redirect_to(organizations_path)
       end
     end
 
