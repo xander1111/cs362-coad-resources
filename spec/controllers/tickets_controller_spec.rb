@@ -15,6 +15,13 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
 
+    describe "tickets#new" do
+      it "should be successful" do
+        get :new
+        expect(response).to be_successful
+      end
+    end
+
   end
 
   context "unapproved user" do
@@ -26,6 +33,13 @@ RSpec.describe TicketsController, type: :controller do
       it "redirects to dashboard" do
         get :show, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "tickets#new" do
+      it "should be successful" do
+        get :new
+        expect(response).to be_successful
       end
     end
 
@@ -44,6 +58,13 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
 
+    describe "tickets#new" do
+      it "should be successful" do
+        get :new
+        expect(response).to be_successful
+      end
+    end
+
   end
 
   context "admin user" do
@@ -54,6 +75,13 @@ RSpec.describe TicketsController, type: :controller do
     describe "tickets#show" do
       it "should be successful" do
         get :show, params: { id: ticket.id }
+        expect(response).to be_successful
+      end
+    end
+
+    describe "tickets#new" do
+      it "should be successful" do
+        get :new
         expect(response).to be_successful
       end
     end
