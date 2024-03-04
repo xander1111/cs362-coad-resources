@@ -50,6 +50,13 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
 
+    describe "tickets#destroy" do
+      it "redirects to dashboard" do
+        delete :destroy, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
   end
 
   context "unapproved user" do
@@ -95,6 +102,13 @@ RSpec.describe TicketsController, type: :controller do
     describe "tickets#close" do
       it "redirects to dashboard" do
         post :close, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "tickets#destroy" do
+      it "redirects to dashboard" do
+        delete :destroy, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -152,6 +166,13 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
 
+    describe "tickets#destroy" do
+      it "redirects to dashboard" do
+        delete :destroy, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
   end
 
   context "admin user" do
@@ -200,6 +221,13 @@ RSpec.describe TicketsController, type: :controller do
         allow(TicketService).to receive(:close_ticket).and_return(:ok)
         post :close, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path << '#tickets:open')
+      end
+    end
+
+    describe "tickets#destroy" do
+      it "redirects to the tickets section of the dashboard page" do
+        delete :destroy, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path << '#tickets')
       end
     end
 
