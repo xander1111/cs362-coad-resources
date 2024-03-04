@@ -55,6 +55,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
       end
     end
 
+    describe "resource_category#deactivate" do
+      it "redirects to sign in page" do
+        patch :deactivate, params: { id: res_cat.id }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
   end
 
   context "normal user" do
@@ -107,6 +114,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
     describe "resource_category#activate" do
       it "redirects to dashboard" do
         patch :activate, params: { id: res_cat.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "resource_category#deactivate" do
+      it "redirects to dashboard" do
+        patch :deactivate, params: { id: res_cat.id }
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -164,6 +178,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
     describe "resource_category#activate" do
       it "redirects to the activated resource categories page" do
         patch :activate, params: { id: res_cat.id }
+        expect(response).to redirect_to(resource_category_path(res_cat.id))
+      end
+    end
+
+    describe "resource_category#deactivate" do
+      it "redirects to the deactivated resource categories page" do
+        patch :deactivate, params: { id: res_cat.id }
         expect(response).to redirect_to(resource_category_path(res_cat.id))
       end
     end
