@@ -11,6 +11,13 @@ RSpec.describe StaticPagesController, type: :controller do
       end
     end
 
+    describe "static_pages#ticket_submitted" do
+      it "should be successful" do
+        get :ticket_submitted
+        expect(response).to be_successful
+      end
+    end
+
   end
 
   context "normal user" do
@@ -21,6 +28,13 @@ RSpec.describe StaticPagesController, type: :controller do
     describe "static_pages#index" do
       it "should be successful" do
         get :index
+        expect(response).to be_successful
+      end
+    end
+
+    describe "static_pages#ticket_submitted" do
+      it "should be successful" do
+        get :ticket_submitted
         expect(response).to be_successful
       end
     end
@@ -36,6 +50,13 @@ RSpec.describe StaticPagesController, type: :controller do
     describe "static_pages#index" do
       it "should be successful" do
         get :index
+        expect(response).to be_successful
+      end
+    end
+
+    describe "static_pages#ticket_submitted" do
+      it "should be successful" do
+        get :ticket_submitted
         expect(response).to be_successful
       end
     end
