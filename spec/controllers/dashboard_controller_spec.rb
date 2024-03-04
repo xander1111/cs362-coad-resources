@@ -8,7 +8,7 @@ RSpec.describe DashboardController, type: :controller do
   
       it "redirects to sign in page" do
         get :index
-        expect(response).to redirect_to('/users/sign_in')
+        expect(response).to redirect_to(new_user_session_path)
       end
   
     end
@@ -16,8 +16,8 @@ RSpec.describe DashboardController, type: :controller do
     context "normal user" do
         
       it "should be successful" do
-        user = create(:user)
-        sign_in(user) 
+        @user = create(:user)
+        sign_in(@user) 
         get :index
         expect(response).to be_successful
       end
@@ -27,8 +27,8 @@ RSpec.describe DashboardController, type: :controller do
     context "admin user" do
   
       it "should be successful" do
-        user = create(:user, role: :admin)
-        sign_in(user) 
+        @user = create(:user, role: :admin)
+        sign_in(@user) 
         get :index
         expect(response).to be_successful
       end
