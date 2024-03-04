@@ -2,11 +2,20 @@ require 'rails_helper'
 
 RSpec.describe ResourceCategoriesController, type: :controller do
 
+  let (:res_cat) { create(:resource_category) }
+
   context "no user" do
 
     describe "resource_category#index" do
       it "redirects to sign in page" do
         get :index
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    describe "resource_category#show" do
+      it "redirects to sign in page" do
+        get :show, params: { id: res_cat.id }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -25,6 +34,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
       end
     end
 
+    describe "resource_category#show" do
+      it "redirects to dashboard" do
+        get :show, params: { id: res_cat.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
   end
 
 
@@ -36,6 +52,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
     describe "resource_category#index" do
       it "should be successful" do
         get :index
+        expect(response).to be_successful
+      end
+    end
+
+    describe "resource_category#show" do
+      it "should be successful" do
+        get :show, params: { id: res_cat.id }
         expect(response).to be_successful
       end
     end
