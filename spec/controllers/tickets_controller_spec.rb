@@ -23,9 +23,10 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     describe "tickets#create" do
-      it "should be successful" do
+      it "redirects to the ticket submitted page" do
+        allow(Ticket).to receive(:new).and_return(double(:ticket, save: true))
         post :create, params: { ticket: attributes_for(:ticket) }
-        expect(response).to be_successful
+        expect(response).to redirect_to(ticket_submitted_path)
       end
     end
 
@@ -80,8 +81,9 @@ RSpec.describe TicketsController, type: :controller do
 
     describe "tickets#create" do
       it "should be successful" do
+        allow(Ticket).to receive(:new).and_return(double(:ticket, save: true))
         post :create, params: { ticket: attributes_for(:ticket) }
-        expect(response).to be_successful
+        expect(response).to redirect_to(ticket_submitted_path)
       end
     end
 
@@ -137,8 +139,9 @@ RSpec.describe TicketsController, type: :controller do
 
     describe "tickets#create" do
       it "should be successful" do
+        allow(Ticket).to receive(:new).and_return(double(:ticket, save: true))
         post :create, params: { ticket: attributes_for(:ticket) }
-        expect(response).to be_successful
+        expect(response).to redirect_to(ticket_submitted_path)
       end
     end
 
@@ -196,8 +199,9 @@ RSpec.describe TicketsController, type: :controller do
 
     describe "tickets#create" do
       it "should be successful" do
+        allow(Ticket).to receive(:new).and_return(double(:ticket, save: true))
         post :create, params: { ticket: attributes_for(:ticket) }
-        expect(response).to be_successful
+        expect(response).to redirect_to(ticket_submitted_path)
       end
     end
 
