@@ -36,6 +36,13 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
 
+    describe "tickets#release" do
+      it "redirects to dashboard" do
+        post :release, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
   end
 
   context "unapproved user" do
@@ -71,6 +78,13 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
 
+    describe "tickets#release" do
+      it "redirects to dashboard" do
+        post :release, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
   end
 
   context "approved user" do
@@ -101,10 +115,18 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     describe "tickets#capture" do
-      it "" do
+      it "redirects to the open tickets section of the dashboard page" do
         allow(TicketService).to receive(:capture_ticket).and_return(:ok)
         post :capture, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path << '#tickets:open')
+      end
+    end
+
+    describe "tickets#release" do
+      it "redirects to the organization tickets section of the dashboard page" do
+        allow(TicketService).to receive(:release_ticket).and_return(:ok)
+        post :release, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path << '#tickets:organization')
       end
     end
 
@@ -140,6 +162,14 @@ RSpec.describe TicketsController, type: :controller do
       it "redirects to dashboard" do
         post :capture, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "tickets#release" do
+      it "redirects to the captured tickets section of the dashboard page" do
+        allow(TicketService).to receive(:release_ticket).and_return(:ok)
+        post :release, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path << '#tickets:captured')
       end
     end
 
