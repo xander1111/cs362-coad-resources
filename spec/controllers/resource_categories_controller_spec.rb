@@ -20,6 +20,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
       end
     end
 
+    describe "resource_category#new" do
+      it "redirects to sign in page" do
+        get :new
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
   end
 
   context "normal user" do
@@ -37,6 +44,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
     describe "resource_category#show" do
       it "redirects to dashboard" do
         get :show, params: { id: res_cat.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "resource_category#new" do
+      it "redirects to dashboard" do
+        get :new
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -59,6 +73,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
     describe "resource_category#show" do
       it "should be successful" do
         get :show, params: { id: res_cat.id }
+        expect(response).to be_successful
+      end
+    end
+
+    describe "resource_category#new" do
+      it "should be successful" do
+        get :new
         expect(response).to be_successful
       end
     end
