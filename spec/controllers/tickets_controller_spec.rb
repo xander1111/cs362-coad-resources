@@ -4,13 +4,13 @@ RSpec.describe TicketsController, type: :controller do
 
   let (:region) { build_stubbed(:region) }
   let (:res_cat) { build_stubbed(:resource_category) }
+  let (:ticket) { create(:ticket, region: region, resource_category: res_cat) }
 
   context "no user" do
 
     describe "tickets#show" do
       it "redirects to dashboard" do
-        @ticket = create(:ticket, region: region, resource_category: res_cat)
-        get :show, params: { id: @ticket.id }
+        get :show, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -24,8 +24,7 @@ RSpec.describe TicketsController, type: :controller do
 
     describe "tickets#show" do
       it "redirects to dashboard" do
-        @ticket = create(:ticket, region: region, resource_category: res_cat)
-        get :show, params: { id: @ticket.id }
+        get :show, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -40,8 +39,7 @@ RSpec.describe TicketsController, type: :controller do
 
     describe "tickets#show" do
       it "should be successful" do
-        @ticket = create(:ticket, region: region, resource_category: res_cat)
-        get :show, params: { id: @ticket.id }
+        get :show, params: { id: ticket.id }
         expect(response).to be_successful
       end
     end
@@ -55,8 +53,7 @@ RSpec.describe TicketsController, type: :controller do
 
     describe "tickets#show" do
       it "should be successful" do
-        @ticket = create(:ticket, region: region, resource_category: res_cat)
-        get :show, params: { id: @ticket.id }
+        get :show, params: { id: ticket.id }
         expect(response).to be_successful
       end
     end
