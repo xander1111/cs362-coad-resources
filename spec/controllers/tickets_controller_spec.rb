@@ -29,6 +29,13 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
 
+    describe "tickets#capture" do
+      it "redirects to dashboard" do
+        post :capture, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
   end
 
   context "unapproved user" do
@@ -54,6 +61,13 @@ RSpec.describe TicketsController, type: :controller do
       it "should be successful" do
         post :create, params: { ticket: attributes_for(:ticket) }
         expect(response).to be_successful
+      end
+    end
+
+    describe "tickets#capture" do
+      it "redirects to dashboard" do
+        post :capture, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path)
       end
     end
 
@@ -86,6 +100,14 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
 
+    describe "tickets#capture" do
+      it "" do
+        allow(TicketService).to receive(:capture_ticket).and_return(:ok)
+        post :capture, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path << '#tickets:open')
+      end
+    end
+
   end
 
   context "admin user" do
@@ -111,6 +133,13 @@ RSpec.describe TicketsController, type: :controller do
       it "should be successful" do
         post :create, params: { ticket: attributes_for(:ticket) }
         expect(response).to be_successful
+      end
+    end
+
+    describe "tickets#capture" do
+      it "redirects to dashboard" do
+        post :capture, params: { id: ticket.id }
+        expect(response).to redirect_to(dashboard_path)
       end
     end
 
