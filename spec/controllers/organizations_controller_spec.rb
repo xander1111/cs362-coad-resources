@@ -42,6 +42,14 @@ RSpec.describe OrganizationsController, type: :controller do
       end
     end
 
+    describe "organizations#update" do
+      it "redirects to sign in page" do
+        @organization = create(:organization, name: "original name")
+        patch :update, params: { id: @organization.id, organization: attributes_for(:organization).merge(name: "new name") }
+        expect(response).to redirect_to('/users/sign_in')
+      end
+    end
+
   end
 
   context "unapproved user" do
@@ -88,6 +96,14 @@ RSpec.describe OrganizationsController, type: :controller do
     describe "organizations#edit" do
       it "redirects to dashbaord" do
         get :edit, params: { id: 1 }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "organizations#update" do
+      it "redirects to dashboard" do
+        @organization = create(:organization, name: "original name")
+        patch :update, params: { id: @organization.id, organization: attributes_for(:organization).merge(name: "new name") }
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -141,6 +157,14 @@ RSpec.describe OrganizationsController, type: :controller do
       end
     end
 
+    describe "organizations#update" do
+      it "" do
+        @organization = create(:organization, name: "original name")
+        patch :update, params: { id: @organization.id, organization: attributes_for(:organization).merge(name: "new name") }
+        expect(response).to redirect_to(organization_path(id: @organization.id))
+      end
+    end
+
   end
 
   context "admin user" do
@@ -185,6 +209,14 @@ RSpec.describe OrganizationsController, type: :controller do
     describe "organizations#edit" do
       it "redirects to dashboard" do
         get :edit, params: { id: 1 }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "organizations#update" do
+      it "redirects to dashboard" do
+        @organization = create(:organization, name: "original name")
+        patch :update, params: { id: @organization.id, organization: attributes_for(:organization).merge(name: "new name") }
         expect(response).to redirect_to(dashboard_path)
       end
     end

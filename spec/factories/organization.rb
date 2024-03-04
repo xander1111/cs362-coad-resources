@@ -6,7 +6,7 @@ FactoryBot.define do
     phone
     secondary_phone { generate(:phone) }
 
-    status { nil }
+    status { :submitted }
 
     primary_name { generate(:name) }
     secondary_name { generate(:name) }
