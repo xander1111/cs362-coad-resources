@@ -7,7 +7,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
       it "redirects to sign in page" do
         get :index
-        expect(response).to redirect_to('/users/sign_in')
+        expect(response).to redirect_to(new_user_session_path)
       end
 
     end
@@ -16,7 +16,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
       it "redirects to sign in page" do
         post(:create, params: { organization: attributes_for(:organization) })
-        expect(response).to redirect_to('/users/sign_in')
+        expect(response).to redirect_to(new_user_session_path)
       end
 
     end
@@ -24,21 +24,21 @@ RSpec.describe OrganizationsController, type: :controller do
     describe "organizations#new" do
       it "redirects to sign in page" do
         get :new
-        expect(response).to redirect_to('/users/sign_in')
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     describe "organizations#show" do
       it "redirects to sign in page" do
         get :show, params: { id: 1 }
-        expect(response).to redirect_to('/users/sign_in')
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     describe "organizations#edit" do
       it "redirects to sign in page" do
         get :edit, params: { id: 1 }
-        expect(response).to redirect_to('/users/sign_in')
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe OrganizationsController, type: :controller do
       it "redirects to sign in page" do
         @organization = create(:organization, name: "original name")
         patch :update, params: { id: @organization.id, organization: attributes_for(:organization).merge(name: "new name") }
-        expect(response).to redirect_to('/users/sign_in')
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe OrganizationsController, type: :controller do
       it "redirects to sign in page" do
         @organization = create(:organization, status: :submitted)
         post :approve, params: { id: @organization.id }
-        expect(response).to redirect_to('/users/sign_in')
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe OrganizationsController, type: :controller do
       it "redirects to sign in page" do
         @organization = create(:organization, status: :approved)
         post :reject, params: { id: @organization.id, organization: attributes_for(:organization).merge(rejection_reason: "test reason") }
-        expect(response).to redirect_to('/users/sign_in')
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -141,7 +141,6 @@ RSpec.describe OrganizationsController, type: :controller do
     end
 
   end
-
 
   context "approved user" do
 
