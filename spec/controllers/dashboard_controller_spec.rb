@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DashboardController, type: :controller do
 
-  describe "GET /dashboard" do
+  describe "dashboard#index" do
 
     context "logged out user" do
   

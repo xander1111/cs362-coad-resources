@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe OrganizationsController, type: :controller do
 
   context "no user" do
-    describe "GET /organizations" do
+    describe "organizations#index" do
 
       it "redirects to sign in page" do
         get :index
@@ -12,7 +12,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
-    describe "POST /organizations" do
+    describe "organizations#create" do
 
       it "redirects to sign in page" do
         post(:create, params: { organization: attributes_for(:organization) })
@@ -21,21 +21,21 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
-    describe "GET /organizations/new" do
+    describe "organizations#new" do
       it "redirects to sign in page" do
         get :new
         expect(response).to redirect_to('/users/sign_in')
       end
     end
 
-    describe "GET /organizations/:id" do
+    describe "organizations#show" do
       it "redirects to sign in page" do
         get :show, params: { id: 1 }
         expect(response).to redirect_to('/users/sign_in')
       end
     end
 
-    describe "GET /organizations/:id/edit" do
+    describe "organizations#edit" do
       it "redirects to sign in page" do
         get :edit, params: { id: 1 }
         expect(response).to redirect_to('/users/sign_in')
@@ -52,7 +52,7 @@ RSpec.describe OrganizationsController, type: :controller do
       sign_in(user)
     }
 
-    describe "GET /organizations" do
+    describe "organizations#index" do
       it "should be successful" do
         get :index
         expect(response).to be_successful
@@ -60,7 +60,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
-    describe "POST /organizations" do
+    describe "organizations#create" do
 
       it "redirects to the submitted path" do
         post(:create, params: { organization: attributes_for(:organization) })
@@ -69,7 +69,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
-    describe "GET /organizations/new" do
+    describe "organizations#new" do
 
       it "should be successful" do
         get :new
@@ -78,14 +78,14 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
-    describe "GET /organizations/:id" do
+    describe "organizations#show" do
       it "redirects to dashboard" do
         get :show, params: { id: 1 }
         expect(response).to redirect_to(dashboard_path)
       end
     end
 
-    describe "GET /organizations/:id/edit" do
+    describe "organizations#edit" do
       it "redirects to dashbaord" do
         get :edit, params: { id: 1 }
         expect(response).to redirect_to(dashboard_path)
@@ -104,7 +104,7 @@ RSpec.describe OrganizationsController, type: :controller do
       sign_in(user)
     }
 
-    describe "GET /organizations" do
+    describe "organizations#index" do
       it "should be successful" do
         get :index
         expect(response).to be_successful
@@ -112,28 +112,28 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
-    describe "POST /organizations" do
+    describe "organizations#create" do
       it "redirects to the dashboard" do
         post(:create, params: { organization: attributes_for(:organization) })
         expect(response).to redirect_to(dashboard_path)
       end
     end
 
-    describe "GET /organizations/new" do
+    describe "organizations#new" do
       it "redirects to dashboard" do
         get :new
         expect(response).to redirect_to(dashboard_path)
       end
     end
 
-    describe "GET /organizations/:id" do
+    describe "organizations#show" do
       it "should be successful" do
         get :show, params: { id: 1 }
         expect(response).to be_successful
       end
     end
 
-    describe "GET /organizations/:id/edit" do
+    describe "organizations#edit" do
       it "should be successful" do
         allow(user).to receive(:organization).and_return(double(:organization, approved?: true))
         get :edit, params: { id: 1 }
@@ -148,7 +148,7 @@ RSpec.describe OrganizationsController, type: :controller do
     let (:user) { create(:user, role: :admin) }
     before(:each) { sign_in(user) }
 
-    describe "GET /organizations" do
+    describe "organizations#index" do
       it "should be successful" do
         get :index
         expect(response).to be_successful
@@ -156,7 +156,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
-    describe "POST /organizations" do
+    describe "organizations#create" do
 
       it "redirects to the dashboard" do
         post(:create, params: { organization: attributes_for(:organization) })
@@ -165,7 +165,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
-    describe "GET /organizations/new" do
+    describe "organizations#new" do
 
       it "redirects to the dashboard" do
         get :new
@@ -174,7 +174,7 @@ RSpec.describe OrganizationsController, type: :controller do
 
     end
 
-    describe "GET /organizations/:id" do
+    describe "organizations#show" do
       it "should be successful" do
         create(:organization, status: :submitted)
         get :show, params: { id: 1 }
@@ -182,7 +182,7 @@ RSpec.describe OrganizationsController, type: :controller do
       end
     end
 
-    describe "GET /organizations/:id/edit" do
+    describe "organizations#edit" do
       it "redirects to dashboard" do
         get :edit, params: { id: 1 }
         expect(response).to redirect_to(dashboard_path)
