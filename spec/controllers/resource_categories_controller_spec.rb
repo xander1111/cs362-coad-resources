@@ -43,7 +43,14 @@ RSpec.describe ResourceCategoriesController, type: :controller do
 
     describe "resource_category#update" do
       it "redirects to sign in page" do
-        get :update, params: { id: res_cat.id, resource_category: attributes_for(:resource_category) }
+        patch :update, params: { id: res_cat.id, resource_category: attributes_for(:resource_category) }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    describe "resource_category#activate" do
+      it "redirects to sign in page" do
+        patch :activate, params: { id: res_cat.id }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -92,7 +99,14 @@ RSpec.describe ResourceCategoriesController, type: :controller do
 
     describe "resource_category#update" do
       it "redirects to dashboard" do
-        get :update, params: { id: res_cat.id, resource_category: attributes_for(:resource_category) }
+        patch :update, params: { id: res_cat.id, resource_category: attributes_for(:resource_category) }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "resource_category#activate" do
+      it "redirects to dashboard" do
+        patch :activate, params: { id: res_cat.id }
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -141,8 +155,15 @@ RSpec.describe ResourceCategoriesController, type: :controller do
     end
 
     describe "resource_category#update" do
-      it "should be successful" do
-        get :update, params: { id: res_cat.id, resource_category: attributes_for(:resource_category) }
+      it "redirects to the updated resource categories page" do
+        patch :update, params: { id: res_cat.id, resource_category: attributes_for(:resource_category) }
+        expect(response).to redirect_to(resource_category_path(res_cat.id))
+      end
+    end
+
+    describe "resource_category#activate" do
+      it "redirects to the activated resource categories page" do
+        patch :activate, params: { id: res_cat.id }
         expect(response).to redirect_to(resource_category_path(res_cat.id))
       end
     end
