@@ -22,6 +22,13 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
 
+    describe "tickets#create" do
+      it "should be successful" do
+        post :create, params: { ticket: attributes_for(:ticket) }
+        expect(response).to be_successful
+      end
+    end
+
   end
 
   context "unapproved user" do
@@ -39,6 +46,13 @@ RSpec.describe TicketsController, type: :controller do
     describe "tickets#new" do
       it "should be successful" do
         get :new
+        expect(response).to be_successful
+      end
+    end
+
+    describe "tickets#create" do
+      it "should be successful" do
+        post :create, params: { ticket: attributes_for(:ticket) }
         expect(response).to be_successful
       end
     end
@@ -65,6 +79,13 @@ RSpec.describe TicketsController, type: :controller do
       end
     end
 
+    describe "tickets#create" do
+      it "should be successful" do
+        post :create, params: { ticket: attributes_for(:ticket) }
+        expect(response).to be_successful
+      end
+    end
+
   end
 
   context "admin user" do
@@ -82,6 +103,13 @@ RSpec.describe TicketsController, type: :controller do
     describe "tickets#new" do
       it "should be successful" do
         get :new
+        expect(response).to be_successful
+      end
+    end
+
+    describe "tickets#create" do
+      it "should be successful" do
+        post :create, params: { ticket: attributes_for(:ticket) }
         expect(response).to be_successful
       end
     end
