@@ -41,6 +41,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
       end
     end
 
+    describe "resource_category#update" do
+      it "redirects to sign in page" do
+        get :update, params: { id: res_cat.id, resource_category: attributes_for(:resource_category) }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
   end
 
   context "normal user" do
@@ -79,6 +86,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
     describe "resource_category#edit" do
       it "redirects to dashboard" do
         get :edit, params: { id: res_cat.id }
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "resource_category#update" do
+      it "redirects to dashboard" do
+        get :update, params: { id: res_cat.id, resource_category: attributes_for(:resource_category) }
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -123,6 +137,13 @@ RSpec.describe ResourceCategoriesController, type: :controller do
       it "should be successful" do
         get :edit, params: { id: res_cat.id }
         expect(response).to be_successful
+      end
+    end
+
+    describe "resource_category#update" do
+      it "should be successful" do
+        get :update, params: { id: res_cat.id, resource_category: attributes_for(:resource_category) }
+        expect(response).to redirect_to(resource_category_path(res_cat.id))
       end
     end
 
