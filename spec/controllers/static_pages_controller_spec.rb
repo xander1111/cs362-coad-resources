@@ -25,6 +25,13 @@ RSpec.describe StaticPagesController, type: :controller do
       end
     end
 
+    describe "static_pages#organization_application_submitted" do
+      it "should be successful" do
+        get :organization_application_submitted
+        expect(response).to be_successful
+      end
+    end
+
   end
 
   context "normal user" do
@@ -49,6 +56,13 @@ RSpec.describe StaticPagesController, type: :controller do
     describe "static_pages#organization_expectations" do
       it "should be successful" do
         get :organization_expectations
+        expect(response).to be_successful
+      end
+    end
+
+    describe "static_pages#organization_application_submitted" do
+      it "should be successful" do
+        get :organization_application_submitted
         expect(response).to be_successful
       end
     end
@@ -78,6 +92,13 @@ RSpec.describe StaticPagesController, type: :controller do
     describe "static_pages#organization_expectations" do
       it "should be successful" do
         get :organization_expectations
+        expect(response).to be_successful
+      end
+    end
+
+    describe "static_pages#organization_application_submitted" do
+      it "should be successful" do
+        get :organization_application_submitted
         expect(response).to be_successful
       end
     end
