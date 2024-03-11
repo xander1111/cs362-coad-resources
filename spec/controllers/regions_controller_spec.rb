@@ -140,9 +140,16 @@ RSpec.describe RegionsController, type: :controller do
     end
 
     describe "regions#create" do
-      it "redirects to the regions page" do
+      it "redirects to the regions page on success" do
         post :create, params: { region: attributes_for(:region) }
         expect(response).to redirect_to(regions_path)
+      end
+
+       it "stays on the new page on failure" do
+        expect_any_instance_of(Region).to receive(:save).and_return(false)
+        
+        post :create, params: { region: attributes_for(:region) }
+        expect(response).to be_successful
       end
     end
 
@@ -154,9 +161,16 @@ RSpec.describe RegionsController, type: :controller do
     end
 
     describe "regions#update" do
-      it "redirects to the updated region's page" do
+      it "redirects to the updated region's page on success" do
         patch :update, params: { id: region.id, region: attributes_for(:region) }
         expect(response).to redirect_to(region_path(region.id))
+      end
+
+      it "stays on the edit region page on failure" do
+        expect_any_instance_of(Region).to receive(:save).and_return(false)
+        
+        patch :update, params: { id: region.id, region: attributes_for(:region) }
+        expect(response).to be_successful
       end
     end
 
