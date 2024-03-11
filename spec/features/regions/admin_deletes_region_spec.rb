@@ -10,7 +10,7 @@ RSpec.describe 'Deleting a Region', type: :feature do
     @region = create(:region, name: @region_name)
   }
 
-  it "can delete a new region from the home screen" do
+  it "can delete a region from the home screen" do
 
     visit root_path
 
