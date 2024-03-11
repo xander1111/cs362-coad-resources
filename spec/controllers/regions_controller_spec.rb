@@ -13,6 +13,13 @@ RSpec.describe RegionsController, type: :controller do
       end
     end
 
+    describe "regions#new" do
+      it "redirects to sign in page" do
+        get :new
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
   end
 
   context "normal user" do
@@ -20,10 +27,16 @@ RSpec.describe RegionsController, type: :controller do
     let (:user) { create(:user) }
     before(:each) { sign_in(user) }
 
-
     describe "regions#index" do
       it "redirects to dashboard path" do
         get :index
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "regions#new" do
+      it "redirects to dashboard path" do
+        get :new
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -38,6 +51,13 @@ RSpec.describe RegionsController, type: :controller do
     describe "regions#index" do
       it "should be successful" do
         get :index
+        expect(response).to be_successful
+      end
+    end
+
+    describe "regions#new" do
+      it "should be successful" do
+        get :new
         expect(response).to be_successful
       end
     end
