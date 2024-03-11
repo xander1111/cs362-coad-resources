@@ -20,6 +20,13 @@ RSpec.describe RegionsController, type: :controller do
       end
     end
 
+    describe "regions#create" do
+      it "redirects to sign in page" do
+        post :create, params: { region: attributes_for(:region) }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
   end
 
   context "normal user" do
@@ -37,6 +44,13 @@ RSpec.describe RegionsController, type: :controller do
     describe "regions#new" do
       it "redirects to dashboard path" do
         get :new
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "regions#create" do
+      it "redirects to dashboard" do
+        post :create, params: { region: attributes_for(:region) }
         expect(response).to redirect_to(dashboard_path)
       end
     end
@@ -59,6 +73,13 @@ RSpec.describe RegionsController, type: :controller do
       it "should be successful" do
         get :new
         expect(response).to be_successful
+      end
+    end
+
+    describe "regions#create" do
+      it "redirects to the regions page" do
+        post :create, params: { region: attributes_for(:region) }
+        expect(response).to redirect_to(regions_path)
       end
     end
 
