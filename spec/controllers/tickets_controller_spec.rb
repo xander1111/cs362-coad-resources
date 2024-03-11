@@ -23,11 +23,19 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     describe "tickets#create" do
-      it "redirects to the ticket submitted page" do
+
+      it "redirects to the ticket submitted page on success" do
         allow(Ticket).to receive(:new).and_return(double(:ticket, save: true))
         post :create, params: { ticket: attributes_for(:ticket) }
         expect(response).to redirect_to(ticket_submitted_path)
       end
+
+      it "stays on the new page on failure" do
+        allow(Ticket).to receive(:new).and_return(double(:ticket, save: false))
+        post :create, params: { ticket: attributes_for(:ticket) }
+        expect(response).to be_successful
+      end
+
     end
 
     describe "tickets#capture" do
@@ -80,11 +88,19 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     describe "tickets#create" do
+
       it "should be successful" do
         allow(Ticket).to receive(:new).and_return(double(:ticket, save: true))
         post :create, params: { ticket: attributes_for(:ticket) }
         expect(response).to redirect_to(ticket_submitted_path)
       end
+
+      it "stays on the new page on failure" do
+        allow(Ticket).to receive(:new).and_return(double(:ticket, save: false))
+        post :create, params: { ticket: attributes_for(:ticket) }
+        expect(response).to be_successful
+      end
+
     end
 
     describe "tickets#capture" do
@@ -138,35 +154,67 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     describe "tickets#create" do
+
       it "should be successful" do
         allow(Ticket).to receive(:new).and_return(double(:ticket, save: true))
         post :create, params: { ticket: attributes_for(:ticket) }
         expect(response).to redirect_to(ticket_submitted_path)
       end
+
+      it "stays on the new page on failure" do
+        allow(Ticket).to receive(:new).and_return(double(:ticket, save: false))
+        post :create, params: { ticket: attributes_for(:ticket) }
+        expect(response).to be_successful
+      end
+      
     end
 
     describe "tickets#capture" do
-      it "redirects to the open tickets section of the dashboard page" do
+
+      it "redirects to the open tickets section of the dashboard page on success" do
         allow(TicketService).to receive(:capture_ticket).and_return(:ok)
         post :capture, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path << '#tickets:open')
       end
+
+       it "stays on the ticket's page on failure" do
+        allow(TicketService).to receive(:capture_ticket).and_return(nil)
+        post :capture, params: { id: ticket.id }
+        expect(response).to be_successful
+      end
+
     end
 
     describe "tickets#release" do
+
       it "redirects to the organization tickets section of the dashboard page" do
         allow(TicketService).to receive(:release_ticket).and_return(:ok)
         post :release, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path << '#tickets:organization')
       end
+
+      it "stays on the ticket's page on failure" do
+        allow(TicketService).to receive(:release_ticket).and_return(nil)
+        post :release, params: { id: ticket.id }
+        expect(response).to be_successful
+      end
+
     end
 
     describe "tickets#close" do
+
       it "redirects to the organization tickets section of the dashboard page" do
         allow(TicketService).to receive(:close_ticket).and_return(:ok)
         post :close, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path << '#tickets:organization')
       end
+
+      it "stays on the ticket's page on failure" do
+        allow(TicketService).to receive(:close_ticket).and_return(nil)
+        post :close, params: { id: ticket.id }
+        expect(response).to be_successful
+      end
+
     end
 
     describe "tickets#destroy" do
@@ -198,11 +246,19 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     describe "tickets#create" do
+
       it "should be successful" do
         allow(Ticket).to receive(:new).and_return(double(:ticket, save: true))
         post :create, params: { ticket: attributes_for(:ticket) }
         expect(response).to redirect_to(ticket_submitted_path)
       end
+
+      it "stays on the new page on failure" do
+        allow(Ticket).to receive(:new).and_return(double(:ticket, save: false))
+        post :create, params: { ticket: attributes_for(:ticket) }
+        expect(response).to be_successful
+      end
+
     end
 
     describe "tickets#capture" do
@@ -213,19 +269,35 @@ RSpec.describe TicketsController, type: :controller do
     end
 
     describe "tickets#release" do
-      it "redirects to the captured tickets section of the dashboard page" do
+
+      it "redirects to the captured tickets section of the dashboard page on success" do
         allow(TicketService).to receive(:release_ticket).and_return(:ok)
         post :release, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path << '#tickets:captured')
       end
+
+      it "stays on the ticket's page on failure" do
+        allow(TicketService).to receive(:release_ticket).and_return(nil)
+        post :release, params: { id: ticket.id }
+        expect(response).to be_successful
+      end
+
     end
 
     describe "tickets#close" do
-      it "redirects to the open tickets section of the dashboard page" do
+
+      it "redirects to the open tickets section of the dashboard page on success" do
         allow(TicketService).to receive(:close_ticket).and_return(:ok)
         post :close, params: { id: ticket.id }
         expect(response).to redirect_to(dashboard_path << '#tickets:open')
       end
+
+      it "stays on the ticket's page on failure" do
+        allow(TicketService).to receive(:close_ticket).and_return(nil)
+        post :close, params: { id: ticket.id }
+        expect(response).to be_successful
+      end
+
     end
 
     describe "tickets#destroy" do
