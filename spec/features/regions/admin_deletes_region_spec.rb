@@ -20,6 +20,7 @@ RSpec.describe 'Deleting a Region', type: :feature do
     click_on "Delete"
 
     expect(current_path).to eq regions_path
+    expect(page).to_not have_selector("#region_#{@region.id}")
 
   end
 
