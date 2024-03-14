@@ -12,8 +12,6 @@ RSpec.describe 'Updating an Organization', type: :feature do
 
     @res_cat1 = create(:resource_category, name: "Category 1")
     @res_cat2 = create(:resource_category, name: "Category 2")
-
-    @org_name = "Test Org for creation"
   }
 
   it "can update an organization from the home page" do
